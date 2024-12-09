@@ -5,6 +5,6 @@ namespace Framework.Domain.UnitOfWork;
 
 public interface IUnitOfWork : IDisposable
 {
-    IRepository<T> Repository<T>() where T : IBaseEntity;
+    IRepository<T> Repository<T>() where T : class, IBaseEntity;
     Task<int> SaveChangesAsync();
 }

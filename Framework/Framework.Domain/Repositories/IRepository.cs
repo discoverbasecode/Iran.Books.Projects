@@ -3,9 +3,9 @@ using Framework.Domain.Entities;
 
 namespace Framework.Domain.Repositories;
 
-public interface IRepository<T> where T : IBaseEntity
+public interface IRepository<T> where T : class, IBaseEntity
 {
-    Task<T> GetByIdAsync(Guid id);
+    Task<T?> GetByIdAsync(Guid id);
     Task<IEnumerable<T>> GetAllAsync();
     Task<IEnumerable<T>> GetAllIncludingDeletedAsync();
     Task AddAsync(T entity);
@@ -18,7 +18,7 @@ public interface IRepository<T> where T : IBaseEntity
     Task<bool> ExistsAsync(Guid id);
     Task<int> CountAsync();
     Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-    Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+    Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     IQueryable<T> AsQueryable();
     IQueryable<T> Where(Expression<Func<T, bool>> predicate);
     Task SaveChangesAsync();
